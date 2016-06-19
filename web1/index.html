@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Tanquesito</title>
+    <script src="js/jquery-2.0.2.min.js"></script>
+    <script src="js/raphael.2.1.0.min.js"></script>
+    <script src="js/justgage.1.0.1.min.js"></script>
+    <script src="js/industrial.js"></script>
+    <link rel="stylesheet" href="css/industrial.css">
+</head>
+
+<body>
+   
+    <div class="industrial tank size two" >
+        <span class="ticks" data-amount="11" data-scale-freq="1"></span>
+        <div class="space"></div>
+        <div class="meter"></div>
+    </div>
+
+ <script type="text/javascript">
+    $(document).ready(function(){
+                
+        var g2 = new JustGage({
+          id: "g2", 
+          value: 0, 
+          min: 0,
+          max: 100,
+          title: "Tanquesito",
+          label: ""
+        });
+
+        $.ajaxSetup({ cache: false }); 
+        setInterval(function () {
+
+            
+
+			$.get("IO.htm", function(result){
+			    $(".industrial.tank").each(function () {
+			        $(this).industrial(parseInt(result));
+			    });
+				
+			});
+			}, 500);
+    });
+</script>
+
+</body>
+</html>
